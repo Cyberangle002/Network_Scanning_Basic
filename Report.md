@@ -1,0 +1,160 @@
+# 📝 Detailed Report: Network Scanning & Vulnerability Assessment
+
+---
+
+## 🔹 1. Introduction
+This project focuses on performing **network scanning and vulnerability assessment** on a deliberately vulnerable machine (**Metasploitable2**).  
+The main objective was to understand:
+- How attackers gather information using reconnaissance.  
+- How defenders can detect and mitigate risks by analyzing open ports and services.  
+
+The lab was created in a **VirtualBox environment**, ensuring a safe and isolated setup for ethical testing.  
+
+---
+
+## 🔹 2. Methodology
+
+### Step 1: Host Discovery
+- **Tool Used:** Netdiscover  
+- **Command:**  
+  ```bash
+  netdiscover -r 192.168.134.128/24
+
+__ Result: Identified target IP 192.168.134.128 ___
+
+![NetDicover Scan](screenshots\"NetDiscover.png")
+
+
+Step 2: Ping Scan
+
+Tool Used: Nmap
+
+Command:
+
+nmap -sn 192.168.134.128
+
+
+Result: Confirmed that the host is alive.
+
+![Ping Scan](screenshots\"Ping_Scan.png")
+
+
+
+Step 3: Full Port Scan
+
+Tool Used: Nmap
+
+Command:
+
+nmap -p- 192.168.134.128
+
+
+Result: Multiple open ports discovered (21, 22, 23, 25, 80, 3306, 5432 etc.).
+
+![Full Port Scan](screenshots\"Full_Port_Scan.png")
+
+
+Step 4: Service & Version Detection
+
+
+Tool Used: Nmap
+
+Command:
+
+nmap -sV 192.168.134.128
+
+
+Result:
+
+FTP → vsftpd 2.3.4
+
+SSH → OpenSSH 4.7p1
+
+Apache HTTPD → 2.2.8
+
+MySQL → 5.0.51a
+
+![Service and Version Detection Scan](screenshots/"Service_and_Version_Detection.png")
+
+
+
+Step 5: OS Fingerprinting
+
+Tool Used: Nmap
+Command:
+
+nmap -O 192.168.134.128
+
+
+Result: Detected OS: Linux KernelStep 6: Web Vulnerability Scan
+
+![OS Fingerprint Scan](screenshots\"OS_Fingerprint.png")
+
+
+Step 6: Web Vulnerability Scan
+
+Tool Used: Nikto
+
+Command:
+
+nikto -h http://192.168.56.102
+
+
+Result:
+
+Outdated Apache server detected.
+
+Possible XSS vulnerabilities.
+
+Directory listing enabled.
+
+![Web Vulnerability 1 Scan](screenshots\"Web_Vulnerability_1.png")
+![Web Vulnerability 2 Scan](screenshots\"Web_Vulnerability_2.png")
+![Web Vulnerability 3 Scan](screenshots\"Web_Vulnerability_3.png")
+
+
+
+3. Results & Findings
+🔹 3. Results & Findings
+
+Target machine is running multiple outdated services.
+
+Open ports (FTP, SSH, MySQL, PostgreSQL) could be exploited by attackers.
+
+Apache web server has known vulnerabilities.
+
+Lack of patching & misconfiguration make the system highly vulnerable.
+
+
+
+🔹 4. Conclusion
+
+This project demonstrated how network scanning is the first step in cybersecurity investigations.
+
+Attackers use these techniques to find weak points.
+
+Defenders use them to identify and fix vulnerabilities before exploitation.
+
+By performing this project, we gained practical knowledge of:
+
+Reconnaissance & scanning using Nmap.
+
+Web vulnerability analysis using Nikto.
+
+
+
+Importance of proper documentation & evidence collection.
+
+📌 Screenshots
+
+Screenshots of each step are included in the Screenshots/ folder for reference.
+
+⚠️ Disclaimer
+
+This project was conducted only in a controlled lab environment (VirtualBox + Metasploitable2).
+It is intended for educational and ethical purposes only.
+⚠️ Unauthorized scanning of networks/systems is illegal under the IT Act 2000 and IPC Cybercrime 
+
+
+
+
